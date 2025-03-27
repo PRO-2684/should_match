@@ -125,12 +125,10 @@ use macro_rules_attr::apply;
 use should_match::should_match;
 
 macro_rules! should_three {(
-    $(#[$attr:meta])*
-    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+    $($target:tt)*
 ) => {
     ::should_match::should_match! {
-        $(#[$attr])*
-        $vis fn $name() -> $ret_ty $body,
+        $($target)*,
         pattern = $crate::Custom::Three, // Specify the pattern
         message = "Expected `Three`, but got something else" // Specify the message (optional)
     }

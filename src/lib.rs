@@ -37,12 +37,10 @@ macro_rules! should_match {(
 /// You probably don't need this, since this is supported by `#[test]` directly. It exists solely for consistency.
 #[macro_export]
 macro_rules! should_ok {(
-    $(#[$attr:meta])*
-    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+    $($target:tt)*
 ) => {
     $crate::should_match! {
-        $(#[$attr])*
-        $vis fn $name() -> $ret_ty $body,
+        $($target)*,
         pattern = ::core::result::Result::Ok(_),
         message = "Expected `Ok`, but got `Err`"
     }
@@ -58,12 +56,10 @@ macro_rules! should_ok {(
 /// ```
 #[macro_export]
 macro_rules! should_err {(
-    $(#[$attr:meta])*
-    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+    $($target:tt)*
 ) => {
     $crate::should_match! {
-        $(#[$attr])*
-        $vis fn $name() -> $ret_ty $body,
+        $($target)*,
         pattern = ::core::result::Result::Err(_),
         message = "Expected `Err`, but got `Ok`"
     }
@@ -79,12 +75,10 @@ macro_rules! should_err {(
 /// ```
 #[macro_export]
 macro_rules! should_some {(
-    $(#[$attr:meta])*
-    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+    $($target:tt)*
 ) => {
     $crate::should_match! {
-        $(#[$attr])*
-        $vis fn $name() -> $ret_ty $body,
+        $($target)*,
         pattern = ::core::option::Option::Some(_),
         message = "Expected `Some`, but got `None`"
     }
@@ -100,12 +94,10 @@ macro_rules! should_some {(
 /// ```
 #[macro_export]
 macro_rules! should_none {(
-    $(#[$attr:meta])*
-    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+    $($target:tt)*
 ) => {
     $crate::should_match! {
-        $(#[$attr])*
-        $vis fn $name() -> $ret_ty $body,
+        $($target)*,
         pattern = ::core::option::Option::None,
         message = "Expected `None`, but got `Some`"
     }
