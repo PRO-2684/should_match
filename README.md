@@ -83,10 +83,12 @@ should_match! {
 
 ## Shortcuts
 
+### Predefined shortcuts
+
 `should_match` provides some shortcuts for common patterns:
 
 | Macro | Pattern | Message |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | `should_ok` | `Ok(_)` | `` Expected `Ok`, but got `Err` `` |
 | `should_err` | `Err(_)` | `` Expected `Err`, but got `Ok` `` |
 | `should_none` | `None` | `` Expected `None`, but got `Some` `` |
@@ -106,3 +108,28 @@ fn test_should_err() -> Result<(), &'static str> {
 ```
 
 Other shortcuts can be used in the same way.
+
+### Define custom shortcuts
+
+```rust
+use macro_rules_attr::apply;
+use should_match::should_match;
+
+macro_rules! should_three {(
+    $(#[$attr:meta])*
+    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+) => {
+    ::should_match::should_match! {
+        $(#[$attr])*
+        $vis fn $name() -> $ret_ty $body,
+        pattern = $crate::Custom::Three, // Specify the pattern
+        message = "Expected `Three`, but got something else" // Specify the message (optional)
+    }
+}}
+
+#[test]
+#[apply(should_three)]
+fn test_custom_err() -> Custom {
+    Custom::Three
+}
+```

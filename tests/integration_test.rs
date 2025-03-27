@@ -105,7 +105,7 @@ fn test_none_panic() -> Option<()> {
     Some(())
 }
 
-// Testing custom enums
+// Testing custom enums & shortcuts
 
 #[allow(dead_code, reason = "This is a test")]
 enum Custom {
@@ -118,4 +118,22 @@ enum Custom {
 #[apply(should_match, pattern = Custom::One)]
 fn test_custom_ok() -> Custom {
     Custom::One
+}
+
+macro_rules! should_three {(
+    $(#[$attr:meta])*
+    $vis:vis fn $name:ident() -> $ret_ty:ty $body:block
+) => {
+    ::should_match::should_match! {
+        $(#[$attr])*
+        $vis fn $name() -> $ret_ty $body,
+        pattern = $crate::Custom::Three,
+        message = "Expected `Three`, but got something else"
+    }
+}}
+
+#[test]
+#[apply(should_three)]
+fn test_custom_err() -> Custom {
+    Custom::Three
 }
