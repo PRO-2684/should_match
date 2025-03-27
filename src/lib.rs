@@ -34,7 +34,7 @@ macro_rules! should_match {(
 /// should_match! { ..., pattern = Ok(_), message = "Expected `Ok`, but got `Err`" }
 /// ```
 ///
-/// You probably don't need this, since this is supported by `#[test]` directly.
+/// You probably don't need this, since this is supported by `#[test]` directly. It exists solely for consistency.
 #[macro_export]
 macro_rules! should_ok {(
     $(#[$attr:meta])*

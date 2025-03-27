@@ -6,7 +6,7 @@ include = ["/src", "LICENSE", "README.md"]
 repository = "https://github.com/PRO-2684/should_match"
 license = "MIT"
 readme = "README.md"
-description = "The test should return a value that matches the pattern."
+description = "Pass a test if the output matches a pattern."
 keywords = ["macro", "testing"]
 categories = ["rust-patterns", "development-tools::testing"]
 
