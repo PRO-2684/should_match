@@ -27,6 +27,11 @@ cargo add --dev macro_rules_attr should_match
 
 ## The `should_match` macro
 
+The `should_match` macro wraps given function and asserts that its output matches the specified pattern. Note that:
+
+- The function must not accept any arguments.
+- The function must return something - there's no point matching `()`.
+
 ### With `macro_rules_attr`
 
 Simply `apply` the `should_match` macro, and specify your pattern (the order of `apply` and `should_match` does not matter):

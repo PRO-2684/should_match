@@ -1,7 +1,7 @@
 #![doc = include_str!("../README.md")]
 #![no_std]
 
-/// Wraps a function that takes nothing, panicking if the result does not match the expected pattern.
+/// Wraps a function that takes nothing and returns something, panicking if the result does not match the expected pattern.
 ///
 /// See the [crate-level documentation](crate) for more information.
 #[macro_export]
@@ -25,7 +25,7 @@ macro_rules! should_match {(
 
 // Shortcuts
 
-/// Wraps a function that takes nothing, panicking if the result is not `Ok`. Shortcut for [`should_match!`].
+/// Wraps a function that takes nothing and returns something, panicking if the result is not `Ok`. Shortcut for [`should_match!`].
 ///
 /// ```rust ignore
 /// // This macro invocation:
@@ -46,7 +46,7 @@ macro_rules! should_ok {(
     }
 }}
 
-/// Wraps a function that takes nothing, panicking if the result is not `Err`. Shortcut for [`should_match!`].
+/// Wraps a function that takes nothing and returns something, panicking if the result is not `Err`. Shortcut for [`should_match!`].
 ///
 /// ```rust ignore
 /// // This macro invocation:
@@ -65,7 +65,7 @@ macro_rules! should_err {(
     }
 }}
 
-/// Wraps a function that takes nothing, panicking if the result is not `Some`. Shortcut for [`should_match!`].
+/// Wraps a function that takes nothing and returns something, panicking if the result is not `Some`. Shortcut for [`should_match!`].
 ///
 /// ```rust ignore
 /// // This macro invocation:
@@ -84,7 +84,7 @@ macro_rules! should_some {(
     }
 }}
 
-/// Wraps a function that takes nothing, panicking if the result is not `None`. Shortcut for [`should_match!`].
+/// Wraps a function that takes nothing and returns something, panicking if the result is not `None`. Shortcut for [`should_match!`].
 ///
 /// ```rust ignore
 /// // This macro invocation:
