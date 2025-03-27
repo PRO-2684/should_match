@@ -9,7 +9,7 @@ macro_rules! should_match {(
     $(#[$attr:meta])*
     $vis:vis fn $name:ident() -> $ret_ty:ty $body:block,
     pattern = $pattern:pat
-    $(, message = $message:literal)?
+    $(, message = $message:literal)? $(,)?
 ) => {
     $(#[$attr])*
     $vis fn $name() {
