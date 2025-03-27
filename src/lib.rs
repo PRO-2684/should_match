@@ -1,5 +1,8 @@
 #![doc = include_str!("../README.md")]
 #![no_std]
+#![deny(missing_docs)]
+#![warn(clippy::all, clippy::nursery, clippy::cargo)]
+#![allow(clippy::test_attr_in_doctest, reason = "For demonstration purposes")]
 
 /// Wraps a function that takes nothing and returns something, panicking if the result does not match the expected pattern.
 ///
