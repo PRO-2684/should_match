@@ -1,0 +1,14 @@
+[package]
+name = "should_match"
+version = "0.1.0"
+edition = "2024"
+include = ["/src", "LICENSE", "README.md"]
+repository = "https://github.com/PRO-2684/should_match"
+license = "MIT"
+readme = "README.md"
+description = "The test should return a value that matches the pattern."
+keywords = ["macro", "testing"]
+categories = ["rust-patterns", "development-tools::testing"]
+
+[dev-dependencies]
+macro_rules_attr = { path = "../macro_rules_attr", version = "0.1.0" }
