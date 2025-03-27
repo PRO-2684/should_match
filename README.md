@@ -7,6 +7,10 @@
 
 Pass a test if the output matches a pattern.
 
+## Features
+
+This library is **lightweight** and **fast**, since it is based on `macro_rules`, with zero dependencies.
+
 ## Setup
 
 This crate is primarily intended for use in tests, so add it to your `dev-dependencies` instead of `dependencies`:
