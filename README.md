@@ -7,9 +7,32 @@
 
 Pass a test if the output matches a pattern.
 
+## TL;DR
+
+```rust
+use macro_rules_attr::apply;
+use should_match::{should_err, test_some};
+
+// Pass the test if the output is `Err`
+#[test]
+#[apply(should_err)]
+fn test_should_err() -> Result<(), &'static str> {
+    Err("error")
+}
+
+// Pass the test if the output is `Some`
+// `test_*` macros automatically add `#[test]` for you
+#[apply(test_some)]
+fn test_test_some() -> Option<i32> {
+    Some(42)
+}
+```
+
+Read on for detailed, bottom-up reference.
+
 ## Features
 
-This library is **lightweight** and **fast**, since it is based on `macro_rules`, with zero dependencies.
+This library is **lightweight** and **fast**, based on `macro_rules` without any dependencies.
 
 ## Setup
 
@@ -34,7 +57,7 @@ The `should_match` macro wraps given function and asserts that its output matche
 
 ### With `macro_rules_attr`
 
-Simply `apply` the `should_match` macro, and specify your pattern (the order of `apply` and `should_match` does not matter):
+Simply `apply` the `should_match` macro, and specify your pattern (the order of `#[test]` and `should_match` does not matter):
 
 ```rust
 use macro_rules_attr::apply;
@@ -97,7 +120,7 @@ should_match! {
 
 ## Shortcuts
 
-### Predefined shortcuts
+### `should_*` shortcuts
 
 `should_match` provides some shortcuts for common patterns:
 
@@ -123,11 +146,35 @@ fn test_should_err() -> Result<(), &'static str> {
 
 Other shortcuts can be used in the same way.
 
-### Define custom shortcuts
+### `test_*` shortcuts
+
+Basically `should_*` + `#[test]`. Available shortcuts:
+
+- `test_match`
+- `test_ok`
+- `test_err`
+- `test_none`
+- `test_some`
+
+An example of using `test_err`:
 
 ```rust
 use macro_rules_attr::apply;
-use should_match::should_match;
+use should_match::test_err;
+
+// Note that we don't need `#[test]` here - the macro will add it for us
+#[apply(test_err)]
+fn test_test_err() -> Result<(), &'static str> {
+    Err("error")
+}
+```
+
+### Define custom shortcuts
+
+Defining `should_*` shortcuts:
+
+```rust
+use macro_rules_attr::apply;
 
 macro_rules! should_three {(
     $($target:tt)*
@@ -142,6 +189,27 @@ macro_rules! should_three {(
 #[test]
 #[apply(should_three)]
 fn test_custom_err() -> Custom {
+    Custom::Three
+}
+```
+
+Defining `test_*` shortcuts:
+
+```rust
+use macro_rules_attr::apply;
+
+macro_rules! test_three {(
+    $($target:tt)*
+) => {
+    ::should_match::test_match! {
+        $($target)*,
+        pattern = $crate::Custom::Three, // Specify the pattern
+        message = "Expected `Three`, but got something else" // Specify the message (optional)
+    }
+}}
+
+#[apply(test_three)]
+fn test_test_custom_err() -> Custom {
     Custom::Three
 }
 ```
