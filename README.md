@@ -1,5 +1,8 @@
 # `should_match`
 
+> [!WARNING]
+> Moved to [Candy-Pile](https://github.com/PRO-2684/Candy-Pile/tree/main/should_match).
+
 [![GitHub License](https://img.shields.io/github/license/PRO-2684/should_match?logo=opensourceinitiative)](https://github.com/PRO-2684/should_match/blob/main/LICENSE)
 [![Crates.io Version](https://img.shields.io/crates/v/should_match?logo=rust)](https://crates.io/crates/should_match)
 [![Crates.io Total Downloads](https://img.shields.io/crates/d/should_match?logo=rust)](https://crates.io/crates/should_match)
